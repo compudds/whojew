@@ -1,0 +1,422 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		07660D961AB9A84700CC33AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07660D951AB9A84700CC33AE /* AppDelegate.swift */; };
+		07660D981AB9A84700CC33AE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07660D971AB9A84700CC33AE /* ViewController.swift */; };
+		07660D9B1AB9A84700CC33AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07660D991AB9A84700CC33AE /* Main.storyboard */; };
+		07660D9D1AB9A84700CC33AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07660D9C1AB9A84700CC33AE /* Images.xcassets */; };
+		07660DA01AB9A84700CC33AE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07660D9E1AB9A84700CC33AE /* LaunchScreen.xib */; };
+		07660DAC1AB9A84700CC33AE /* WhoJewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07660DAB1AB9A84700CC33AE /* WhoJewTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		07660DA61AB9A84700CC33AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07660D881AB9A84700CC33AE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 07660D8F1AB9A84700CC33AE;
+			remoteInfo = WhoJew;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		07660D901AB9A84700CC33AE /* WhoJew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhoJew.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		07660D941AB9A84700CC33AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07660D951AB9A84700CC33AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		07660D971AB9A84700CC33AE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		07660D9A1AB9A84700CC33AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		07660D9C1AB9A84700CC33AE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		07660D9F1AB9A84700CC33AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		07660DA51AB9A84700CC33AE /* WhoJewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhoJewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		07660DAA1AB9A84700CC33AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07660DAB1AB9A84700CC33AE /* WhoJewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoJewTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		07660D8D1AB9A84700CC33AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07660DA21AB9A84700CC33AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		07660D871AB9A84700CC33AE = {
+			isa = PBXGroup;
+			children = (
+				07660D921AB9A84700CC33AE /* WhoJew */,
+				07660DA81AB9A84700CC33AE /* WhoJewTests */,
+				07660D911AB9A84700CC33AE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		07660D911AB9A84700CC33AE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				07660D901AB9A84700CC33AE /* WhoJew.app */,
+				07660DA51AB9A84700CC33AE /* WhoJewTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		07660D921AB9A84700CC33AE /* WhoJew */ = {
+			isa = PBXGroup;
+			children = (
+				07660D951AB9A84700CC33AE /* AppDelegate.swift */,
+				07660D971AB9A84700CC33AE /* ViewController.swift */,
+				07660D991AB9A84700CC33AE /* Main.storyboard */,
+				07660D9C1AB9A84700CC33AE /* Images.xcassets */,
+				07660D9E1AB9A84700CC33AE /* LaunchScreen.xib */,
+				07660D931AB9A84700CC33AE /* Supporting Files */,
+			);
+			path = WhoJew;
+			sourceTree = "<group>";
+		};
+		07660D931AB9A84700CC33AE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				07660D941AB9A84700CC33AE /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		07660DA81AB9A84700CC33AE /* WhoJewTests */ = {
+			isa = PBXGroup;
+			children = (
+				07660DAB1AB9A84700CC33AE /* WhoJewTests.swift */,
+				07660DA91AB9A84700CC33AE /* Supporting Files */,
+			);
+			path = WhoJewTests;
+			sourceTree = "<group>";
+		};
+		07660DA91AB9A84700CC33AE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				07660DAA1AB9A84700CC33AE /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		07660D8F1AB9A84700CC33AE /* WhoJew */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07660DAF1AB9A84700CC33AE /* Build configuration list for PBXNativeTarget "WhoJew" */;
+			buildPhases = (
+				07660D8C1AB9A84700CC33AE /* Sources */,
+				07660D8D1AB9A84700CC33AE /* Frameworks */,
+				07660D8E1AB9A84700CC33AE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WhoJew;
+			productName = WhoJew;
+			productReference = 07660D901AB9A84700CC33AE /* WhoJew.app */;
+			productType = "com.apple.product-type.application";
+		};
+		07660DA41AB9A84700CC33AE /* WhoJewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07660DB21AB9A84700CC33AE /* Build configuration list for PBXNativeTarget "WhoJewTests" */;
+			buildPhases = (
+				07660DA11AB9A84700CC33AE /* Sources */,
+				07660DA21AB9A84700CC33AE /* Frameworks */,
+				07660DA31AB9A84700CC33AE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				07660DA71AB9A84700CC33AE /* PBXTargetDependency */,
+			);
+			name = WhoJewTests;
+			productName = WhoJewTests;
+			productReference = 07660DA51AB9A84700CC33AE /* WhoJewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		07660D881AB9A84700CC33AE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Better Search, LLC";
+				TargetAttributes = {
+					07660D8F1AB9A84700CC33AE = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					07660DA41AB9A84700CC33AE = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 07660D8F1AB9A84700CC33AE;
+					};
+				};
+			};
+			buildConfigurationList = 07660D8B1AB9A84700CC33AE /* Build configuration list for PBXProject "WhoJew" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 07660D871AB9A84700CC33AE;
+			productRefGroup = 07660D911AB9A84700CC33AE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				07660D8F1AB9A84700CC33AE /* WhoJew */,
+				07660DA41AB9A84700CC33AE /* WhoJewTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		07660D8E1AB9A84700CC33AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07660D9B1AB9A84700CC33AE /* Main.storyboard in Resources */,
+				07660DA01AB9A84700CC33AE /* LaunchScreen.xib in Resources */,
+				07660D9D1AB9A84700CC33AE /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07660DA31AB9A84700CC33AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		07660D8C1AB9A84700CC33AE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07660D981AB9A84700CC33AE /* ViewController.swift in Sources */,
+				07660D961AB9A84700CC33AE /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07660DA11AB9A84700CC33AE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07660DAC1AB9A84700CC33AE /* WhoJewTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		07660DA71AB9A84700CC33AE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 07660D8F1AB9A84700CC33AE /* WhoJew */;
+			targetProxy = 07660DA61AB9A84700CC33AE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		07660D991AB9A84700CC33AE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07660D9A1AB9A84700CC33AE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		07660D9E1AB9A84700CC33AE /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07660D9F1AB9A84700CC33AE /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		07660DAD1AB9A84700CC33AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		07660DAE1AB9A84700CC33AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		07660DB01AB9A84700CC33AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = WhoJew/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		07660DB11AB9A84700CC33AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = WhoJew/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		07660DB31AB9A84700CC33AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = WhoJewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WhoJew.app/WhoJew";
+			};
+			name = Debug;
+		};
+		07660DB41AB9A84700CC33AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = WhoJewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WhoJew.app/WhoJew";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		07660D8B1AB9A84700CC33AE /* Build configuration list for PBXProject "WhoJew" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07660DAD1AB9A84700CC33AE /* Debug */,
+				07660DAE1AB9A84700CC33AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07660DAF1AB9A84700CC33AE /* Build configuration list for PBXNativeTarget "WhoJew" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07660DB01AB9A84700CC33AE /* Debug */,
+				07660DB11AB9A84700CC33AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		07660DB21AB9A84700CC33AE /* Build configuration list for PBXNativeTarget "WhoJewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07660DB31AB9A84700CC33AE /* Debug */,
+				07660DB41AB9A84700CC33AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 07660D881AB9A84700CC33AE /* Project object */;
+}
