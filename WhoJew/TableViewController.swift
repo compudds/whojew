@@ -18,7 +18,7 @@ var lastname1 = String()
 
 class TableViewController: UITableViewController, ADBannerViewDelegate {
 
-    //var imageFiles = UIImage()
+    var imageFiles = UIImage()
     
     @IBAction func backToHome(sender: AnyObject) {
        
@@ -44,7 +44,39 @@ class TableViewController: UITableViewController, ADBannerViewDelegate {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
 
-        cell.textLabel?.text = "\(results[indexPath.row])"
+        let url1 = "http://whojew.bettersearchllc.com/images/thumbs/" + "\(firstname[indexPath.row])" + "_" + "\(lastname[indexPath.row])" + ".jpg"
+        
+        let imgURL: NSURL = NSURL(string: url1)!
+        
+        let request: NSURLRequest = NSURLRequest(URL: imgURL)
+        
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse?,data: NSData?,error: NSError?) -> Void in
+            if error == nil {
+                let imageView = UIImageView(frame: CGRectMake(0, 75, 75, 0))
+                let imgGet = UIImage(data: data!)
+                let fixedImage = UIImage(named: "female-placeholder.png")
+                
+                let size = CGSizeMake(125, 150)
+                
+                //self.view.addSubview(imageView)
+                
+                if imgGet != nil {
+                    //self.img.image = UIImage(data: data!)
+                    imageView.image = imgGet
+                    cell.imageView?.image = self.imageResize(imageView.image!,sizeChange: size) //UIImage(data: data!)
+                } else {
+                    //self.img.image = UIImage(named: "female-placeholder.png")
+                    imageView.image = fixedImage
+                    cell.imageView?.image = self.imageResize(imageView.image!,sizeChange: size)  //UIImage(named: "female-placeholder.png")
+                }
+                
+            } else {
+                print(error)
+            }
+        })
+
+        
+        cell.textLabel?.text = " \(results[indexPath.row])"
         
         cell.textLabel?.numberOfLines = 0
         
@@ -156,10 +188,23 @@ class TableViewController: UITableViewController, ADBannerViewDelegate {
     
     func dismissAlert(){
         
-        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("noInternetConnection"), userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(TableViewController.noInternetConnection), userInfo: nil, repeats: false)
         
     }
-
+    
+    func imageResize (image:UIImage, sizeChange:CGSize)-> UIImage{
+        
+        let hasAlpha = true
+        let scale: CGFloat = 0.0 // Use scale factor of main screen
+        
+        UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
+        image.drawInRect(CGRect(origin: CGPointZero, size: sizeChange))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        return scaledImage
+    }
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

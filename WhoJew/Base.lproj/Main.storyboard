@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -121,7 +122,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="oe5-lu-kaf">
+                            <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oe5-lu-kaf">
                                 <rect key="frame" x="27" y="617" width="320" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="r0X-j9-bNd"/>
@@ -265,15 +266,18 @@
         <scene sceneID="8s2-dT-NCb">
             <objects>
                 <tableViewController id="sul-3x-6zg" customClass="TableViewController" customModule="WhoJew" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="NxQ-ez-t2Q">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="133" sectionHeaderHeight="22" sectionFooterHeight="22" id="NxQ-ez-t2Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="rwK-zt-4TN">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textAttributes key="titleTextAttributes">
+                                <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
+                            </textAttributes>
                             <items>
-                                <navigationItem title="Jewish or Partially Jewish Results" id="mee-EK-Fir">
+                                <navigationItem title="Jewish Results" id="mee-EK-Fir">
                                     <barButtonItem key="leftBarButtonItem" title="  Home" id="pHl-C0-d9E">
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" identifier="resultsToHome" id="QZE-xl-vqd"/>
@@ -283,13 +287,15 @@
                             </items>
                         </navigationBar>
                         <adBannerView key="tableFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Tvr-DM-dJM">
-                            <rect key="frame" x="0.0" y="-50" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="221" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </adBannerView>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="56" id="kzj-pC-eYO">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="133" id="kzj-pC-eYO">
+                                <rect key="frame" x="0.0" y="66" width="375" height="133"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kzj-pC-eYO" id="bHA-V9-jhh">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="132"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -743,7 +749,7 @@ Thank you for using WhoJew?. </string>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="Jzr-6Y-lAj" customClass="CollectionViewCell" customModule="WhoJew" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="175" height="259"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="175" height="259"/>
@@ -824,11 +830,11 @@ Thank you for using WhoJew?. </string>
         <image name="female-placeholder.png" width="240" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NAD-kG-8eJ"/>
-        <segue reference="eZ9-b2-oXK"/>
-        <segue reference="p1A-1K-5be"/>
         <segue reference="Pvb-fa-r7Y"/>
-        <segue reference="wl1-5Q-SLZ"/>
+        <segue reference="TEs-B8-PsZ"/>
+        <segue reference="eZ9-b2-oXK"/>
         <segue reference="FcP-Z9-MEZ"/>
+        <segue reference="wl1-5Q-SLZ"/>
+        <segue reference="QZE-xl-vqd"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -82,13 +82,13 @@ class ViewController: UIViewController, ADBannerViewDelegate, UIScrollViewDelega
         //query.whereKey("firstname", hasPrefix: trimmed)
         //query.whereKey("lastname", hasPrefix: trimmed)
         query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
                 
-                    NSLog("Successfully retrieved \(objects.count).")
+                    NSLog("Successfully retrieved \(objects!.count).")
                 
-                    for object in objects {
-                        //NSLog("%@", object.objectId)
+                    for object in objects! {
+                        
                         results.append(object["fullname"] as! String)
                         cat.append(object["cat"] as! String)
                         rel.append(object["rel"] as! String)
@@ -125,7 +125,7 @@ class ViewController: UIViewController, ADBannerViewDelegate, UIScrollViewDelega
             search["search"] = trimmed
             search["jewish"] = true
             search.saveInBackgroundWithBlock {
-                (success: Bool, error: NSError!) -> Void in
+                (success: Bool, error: NSError?) -> Void in
                 if (success) {
                     // The object has been saved.
                     print("The search has been saved to \"InDatabase\".")
@@ -173,7 +173,7 @@ class ViewController: UIViewController, ADBannerViewDelegate, UIScrollViewDelega
             search["search"] = trimmed
             search["jewish"] = false
             search.saveInBackgroundWithBlock {
-                (success: Bool, error: NSError!) -> Void in
+                (success: Bool, error: NSError?) -> Void in
                 if (success) {
                     // The object has been saved.
                     print("The search has been saved to \"NotInDatabase\".")
@@ -300,7 +300,7 @@ class ViewController: UIViewController, ADBannerViewDelegate, UIScrollViewDelega
     
     func dismissAlert(){
         
-        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("noInternetConnection"), userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(ViewController.noInternetConnection), userInfo: nil, repeats: false)
         
     }
     

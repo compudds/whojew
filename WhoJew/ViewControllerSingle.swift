@@ -152,7 +152,7 @@ class ViewControllerSingle: UIViewController, ADBannerViewDelegate {
     
     func dismissAlert(){
         
-        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("noInternetConnection"), userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(ViewControllerSingle.noInternetConnection), userInfo: nil, repeats: false)
         
     }
     

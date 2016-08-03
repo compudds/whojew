@@ -119,7 +119,7 @@ class LayoutController: UICollectionViewController, UICollectionViewDelegateFlow
     
     func dismissAlert(){
         
-        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("noInternetConnection"), userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(LayoutController.noInternetConnection), userInfo: nil, repeats: false)
         
     }
     
@@ -162,13 +162,13 @@ class LayoutController: UICollectionViewController, UICollectionViewDelegateFlow
             query.whereKey("id", containedIn: idArray)
             query.limit = 500
             query.findObjectsInBackgroundWithBlock {
-                (objects: [AnyObject]!, error: NSError!) -> Void in
+                (objects: [PFObject]?, error: NSError?) -> Void in
                 
                 if error == nil {
             
-                    NSLog("Successfully retrieved \(objects.count).")
-                    countObj = objects.count
-                    for object in objects {
+                    NSLog("Successfully retrieved \(objects!.count).")
+                    countObj = objects!.count
+                    for object in objects! {
                         
                         newRel1.append(object["cat"] as! String)
                         let name = object["fullname"] as! String
@@ -208,7 +208,7 @@ class LayoutController: UICollectionViewController, UICollectionViewDelegateFlow
 
     func getPic1() {
     
-        for(var i=0; i<countObj; i++){
+        for(var i=0; i<countObj; i += 1){
             
             //randNum1 = Int(arc4random_uniform(300))
             
@@ -254,7 +254,7 @@ class LayoutController: UICollectionViewController, UICollectionViewDelegateFlow
                 if error == nil {
                     
                     cell.img.image = UIImage(data: data!)
-                    self.tapRec1.addTarget(self, action: "tapped")
+                    self.tapRec1.addTarget(self, action: #selector(LayoutController.tapped))
                     cell.img.addGestureRecognizer(self.tapRec1)
                     cell.img.userInteractionEnabled = true
                     

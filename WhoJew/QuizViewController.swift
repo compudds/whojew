@@ -86,7 +86,7 @@ class QuizViewController: UIViewController {
     
     func dismissAlert(){
         
-        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("noInternetConnection"), userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(QuizViewController.noInternetConnection), userInfo: nil, repeats: false)
         
     }
     
@@ -116,12 +116,12 @@ class QuizViewController: UIViewController {
             query.whereKey("jew", equalTo: "y")
             query.limit = 196 //no=152
             query.findObjectsInBackgroundWithBlock {
-                (objects: [AnyObject]!, error: NSError!) -> Void in
+                (objects: [PFObject]?, error: NSError?) -> Void in
                 if error == nil {
                     
-                    NSLog("Successfully retrieved \(objects.count).")
+                    NSLog("Successfully retrieved \(objects!.count).")
                     
-                    for object in objects {
+                    for object in objects! {
                         
                         let name = object["fullname"] as! String
                         let newYesResults = name.stringByReplacingOccurrencesOfString(" ", withString: "_", options: NSStringCompareOptions.LiteralSearch, range: nil)
@@ -158,12 +158,12 @@ class QuizViewController: UIViewController {
             query.whereKey("jew", equalTo: "n")
             query.limit = 152 //no=152
             query.findObjectsInBackgroundWithBlock {
-                (objects: [AnyObject]!, error: NSError!) -> Void in
+                (objects: [PFObject]?, error: NSError?) -> Void in
                 if error == nil {
                     
-                    NSLog("Successfully retrieved \(objects.count).")
+                    NSLog("Successfully retrieved \(objects!.count).")
                     
-                    for object in objects {
+                    for object in objects! {
                         
                         let name = object["fullname"] as! String
                         let newNoResults = name.stringByReplacingOccurrencesOfString(" ", withString: "_", options: NSStringCompareOptions.LiteralSearch, range: nil)
@@ -221,7 +221,7 @@ class QuizViewController: UIViewController {
                         
                         self.pic1.image = UIImage(data: data!)
                         self.label1.text = newLabel
-                        self.tapRec1.addTarget(self, action: "tappedYes")
+                        self.tapRec1.addTarget(self, action: #selector(QuizViewController.tappedYes))
                         self.pic1.addGestureRecognizer(self.tapRec1)
                         self.pic1.userInteractionEnabled = true
                         
@@ -229,7 +229,7 @@ class QuizViewController: UIViewController {
                         
                         self.pic1.image = UIImage(named: "female-placeholder.png")
                         self.label1.text = newLabel
-                        self.tapRec1.addTarget(self, action: "tappedYes")
+                        self.tapRec1.addTarget(self, action: #selector(QuizViewController.tappedYes))
                         self.pic1.addGestureRecognizer(self.tapRec1)
                         self.pic1.userInteractionEnabled = true
                         
@@ -241,7 +241,7 @@ class QuizViewController: UIViewController {
                         
                         self.pic2.image = UIImage(data: data!)
                         self.label2.text = newLabel
-                        self.tapRec1.addTarget(self, action: "tappedYes")
+                        self.tapRec1.addTarget(self, action: #selector(QuizViewController.tappedYes))
                         self.pic2.addGestureRecognizer(self.tapRec1)
                         self.pic2.userInteractionEnabled = true
                         
@@ -250,7 +250,7 @@ class QuizViewController: UIViewController {
                         
                         self.pic2.image = UIImage(named: "female-placeholder.png")
                         self.label2.text = newLabel
-                        self.tapRec1.addTarget(self, action: "tappedYes")
+                        self.tapRec1.addTarget(self, action: #selector(QuizViewController.tappedYes))
                         self.pic2.addGestureRecognizer(self.tapRec1)
                         self.pic2.userInteractionEnabled = true
                         
@@ -293,7 +293,7 @@ class QuizViewController: UIViewController {
                         
                         self.pic2.image = UIImage(data: data!)
                         self.label2.text = newLabel
-                        self.tapRec2.addTarget(self, action: "tappedNo")
+                        self.tapRec2.addTarget(self, action: #selector(QuizViewController.tappedNo))
                         self.pic2.addGestureRecognizer(self.tapRec2)
                         self.pic2.userInteractionEnabled = true
                         
@@ -303,7 +303,7 @@ class QuizViewController: UIViewController {
                         
                         self.pic2.image = UIImage(named: "female-placeholder.png")
                         self.label2.text = newLabel
-                        self.tapRec2.addTarget(self, action: "tappedNo")
+                        self.tapRec2.addTarget(self, action: #selector(QuizViewController.tappedNo))
                         self.pic2.addGestureRecognizer(self.tapRec2)
                         self.pic2.userInteractionEnabled = true
                         
@@ -315,7 +315,7 @@ class QuizViewController: UIViewController {
                         
                         self.pic1.image = UIImage(data: data!)
                         self.label1.text = newLabel
-                        self.tapRec2.addTarget(self, action: "tappedNo")
+                        self.tapRec2.addTarget(self, action: #selector(QuizViewController.tappedNo))
                         self.pic1.addGestureRecognizer(self.tapRec2)
                         self.pic1.userInteractionEnabled = true
                         
@@ -324,7 +324,7 @@ class QuizViewController: UIViewController {
                         
                         self.pic1.image = UIImage(named: "female-placeholder.png")
                         self.label1.text = newLabel
-                        self.tapRec2.addTarget(self, action: "tappedNo")
+                        self.tapRec2.addTarget(self, action: #selector(QuizViewController.tappedNo))
                         self.pic1.addGestureRecognizer(self.tapRec2)
                         self.pic1.userInteractionEnabled = true
                         

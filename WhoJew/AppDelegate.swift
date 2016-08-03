@@ -8,19 +8,35 @@
 
 import UIKit
 import Parse
+import Bolts
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, PushNotificationDelegate {
 
     var window: UIWindow?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        Parse.setApplicationId("eA3Y2C64we0zyp5GMvwgsLdSjfQzlGwaWBr04vO7", clientKey: "5FqGMb8JR9drScb24GdTCB86XJQl2RuiSfBkg9wp")
+        //Parse.setApplicationId("eA3Y2C64we0zyp5GMvwgsLdSjfQzlGwaWBr04vO7", clientKey: "5FqGMb8JR9drScb24GdTCB86XJQl2RuiSfBkg9wp")
         
-        //PFFacebookUtils.initializeFacebook()
+        Parse.enableLocalDatastore()
+        
+        let parseConfiguration = ParseClientConfiguration(block: { (ParseMutableClientConfiguration) -> Void in
+            ParseMutableClientConfiguration.applicationId = "eA3Y2C64we0zyp5GMvwgsLdSjfQzlGwaWBr04vO"
+            ParseMutableClientConfiguration.clientKey = "NPGFS4QNzVhn6R5PtiOWhakg6uX7VBIst9uDBCa"
+            ParseMutableClientConfiguration.server = "https://whojew.herokuapp.com/parse"
+        })
+        
+        Parse.initializeWithConfiguration(parseConfiguration)
+        
+        PushNotificationManager.pushManager().delegate = self
+        PushNotificationManager.pushManager().handlePushReceived(launchOptions)
+        PushNotificationManager.pushManager().sendAppOpen()
+        PushNotificationManager.pushManager().registerForPushNotifications()
+        
+        //PFUser.enableAutomaticUser()
         
         //var pushSettings:UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert, categories: nil)
         let pushSettings:UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Badge, UIUserNotificationType.Sound, UIUserNotificationType.Alert], categories: nil)
@@ -35,13 +51,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         currentInstallation.saveEventually()
         
         print(deviceToken)
+        
+        PushNotificationManager.pushManager().handlePushRegistration(deviceToken)
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error:NSError) {
         print(error)
+        
+        PushNotificationManager.pushManager().handlePushRegistrationFailure(error)
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {         PFPush.handlePush(userInfo)
+     
+        PushNotificationManager.pushManager().handlePushReceived(userInfo)
+        
+    }
+    
+    func onPushAccepted(pushManager: PushNotificationManager!, withNotification pushNotification: [NSObject : AnyObject]!, onStart: Bool) {
+        print("Push notification accepted: \(pushNotification)");
     }
 
 
