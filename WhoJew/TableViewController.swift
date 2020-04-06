@@ -8,7 +8,6 @@
 
 import UIKit
 import Parse
-import iAd
 
 var results1 = String()
 var cat1 = String()
@@ -16,47 +15,45 @@ var rel1 = String()
 var firstname1 = String()
 var lastname1 = String()
 
-class TableViewController: UITableViewController, ADBannerViewDelegate {
+class TableViewController: UITableViewController {
 
     var imageFiles = UIImage()
     
-    @IBAction func backToHome(sender: AnyObject) {
+    @IBAction func backToHome(_ sender: AnyObject) {
        
-         self.performSegueWithIdentifier("resultsToHome", sender: self)
+         self.performSegue(withIdentifier: "resultsToHome", sender: self)
         
     }
     @IBOutlet var img: UIImageView!
     
-    @IBOutlet var adBannerView: ADBannerView?
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return results.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) 
 
         let url1 = "http://whojew.bettersearchllc.com/images/thumbs/" + "\(firstname[indexPath.row])" + "_" + "\(lastname[indexPath.row])" + ".jpg"
         
-        let imgURL: NSURL = NSURL(string: url1)!
+        let imgURL: URL = URL(string: url1)!
         
-        let request: NSURLRequest = NSURLRequest(URL: imgURL)
+        let request: URLRequest = URLRequest(url: imgURL)
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse?,data: NSData?,error: NSError?) -> Void in
+        NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main, completionHandler: {(data, response, error) -> Void in
             if error == nil {
-                let imageView = UIImageView(frame: CGRectMake(0, 75, 75, 0))
-                let imgGet = UIImage(data: data!)
+                let imageView = UIImageView(frame: CGRect(x: 0, y: 75, width: 75, height: 0))
+                let imgGet = UIImage(data: response!)
                 let fixedImage = UIImage(named: "female-placeholder.png")
                 
-                let size = CGSizeMake(125, 150)
+                let size = CGSize(width: 125, height: 150)
                 
                 //self.view.addSubview(imageView)
                 
@@ -71,9 +68,9 @@ class TableViewController: UITableViewController, ADBannerViewDelegate {
                 }
                 
             } else {
-                print(error)
+                print(error!)
             }
-        })
+        }) //as! (URLResponse?, Data?, Error?) -> Void)
 
         
         cell.textLabel?.text = " \(results[indexPath.row])"
@@ -102,7 +99,7 @@ class TableViewController: UITableViewController, ADBannerViewDelegate {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         results1 = results[indexPath.row]
         cat1 = cat[indexPath.row]
@@ -110,15 +107,15 @@ class TableViewController: UITableViewController, ADBannerViewDelegate {
         firstname1 = firstname[indexPath.row]
         lastname1 = lastname[indexPath.row]
         
-        activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 80, 80))
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        activityIndicator.style = UIActivityIndicatorView.Style.gray
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-        UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+        UIApplication.shared.beginIgnoringInteractionEvents()
         
-        self.performSegueWithIdentifier("listToSingle", sender: self)
+        self.performSegue(withIdentifier: "listToSingle", sender: self)
         
     }
     
@@ -126,27 +123,14 @@ class TableViewController: UITableViewController, ADBannerViewDelegate {
         super.viewDidLoad()
             
         activityIndicator.stopAnimating()
-        UIApplication.sharedApplication().endIgnoringInteractionEvents()
+        UIApplication.shared.endIgnoringInteractionEvents()
         
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         
-        if self.adBannerView != nil {
-            
-            //self.adBannerView!.delegate = self
-            self.canDisplayBannerAds = true
-            print("iAd is showing")
-            
-        } else {
-            
-            //self.adBannerView!.delegate = self
-            self.adBannerView!.hidden = true
-            print("iAd not showing")
-            
-        }
             
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
         noInternetConnection()
         
@@ -158,7 +142,7 @@ class TableViewController: UITableViewController, ADBannerViewDelegate {
         
     }
 
-    func noInternetConnection() {
+    @objc func noInternetConnection() {
         
         if Reachability.isConnectedToNetwork() == true {
             
@@ -169,17 +153,17 @@ class TableViewController: UITableViewController, ADBannerViewDelegate {
             print("Internet connection FAILED")
             
             activityIndicator.stopAnimating()
-            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            UIApplication.shared.endIgnoringInteractionEvents()
             
-            let alert = UIAlertController(title: "Sorry, no internet connection found.", message: "WhoJew? requires an internet connection.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Try Again?", style: .Default, handler: { action in
+            let alert = UIAlertController(title: "Sorry, no internet connection found.", message: "WhoJew? requires an internet connection.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Try Again?", style: .default, handler: { action in
                 
-                alert.dismissViewControllerAnimated(true, completion: nil)
+                alert.dismiss(animated: true, completion: nil)
                 self.dismissAlert()
                 
             }))
             
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
             
             
         }
@@ -188,20 +172,20 @@ class TableViewController: UITableViewController, ADBannerViewDelegate {
     
     func dismissAlert(){
         
-        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(TableViewController.noInternetConnection), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(TableViewController.noInternetConnection), userInfo: nil, repeats: false)
         
     }
     
-    func imageResize (image:UIImage, sizeChange:CGSize)-> UIImage{
+    func imageResize (_ image:UIImage, sizeChange:CGSize)-> UIImage{
         
         let hasAlpha = true
         let scale: CGFloat = 0.0 // Use scale factor of main screen
         
         UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
-        image.drawInRect(CGRect(origin: CGPointZero, size: sizeChange))
+        image.draw(in: CGRect(origin: CGPoint.zero, size: sizeChange))
         
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
-        return scaledImage
+        return scaledImage!
     }
     
     

@@ -8,84 +8,70 @@
 
 import UIKit
 import Parse
-import iAd
+import WebKit
 
-class ImdbViewController: UIViewController, ADBannerViewDelegate {
+
+class ImdbViewController: UIViewController {
     
-    @IBAction func imdbToHome(sender: AnyObject) {
+    @IBAction func imdbToHome(_ sender: AnyObject) {
         
-        self.performSegueWithIdentifier("imdbToHome", sender: self)
+        self.performSegue(withIdentifier: "imdbToHome", sender: self)
     }
     
-    @IBAction func backToSlideshow(sender: AnyObject) {
+    @IBAction func backToSlideshow(_ sender: AnyObject) {
         
-        self.performSegueWithIdentifier("imdbToSlideshow", sender: self)
-        
-    }
-    
-    @IBOutlet var containerView: UIWebView!
-    
-    @IBOutlet var adBannerView: ADBannerView?
-    
-    @IBAction func imdbToSearch(sender: AnyObject) {
-        
-        self.performSegueWithIdentifier("imdbToList", sender: self)
-        
+        self.performSegue(withIdentifier: "imdbToSlideshow", sender: self)
         
     }
     
-    @IBAction func imdbToWiki(sender: AnyObject) {
+    @IBOutlet var webView: WKWebView!
+    
+    @IBAction func imdbToSearch(_ sender: AnyObject) {
         
-        self.performSegueWithIdentifier("imdbToWiki", sender: self)
+        self.performSegue(withIdentifier: "imdbToList", sender: self)
+        
+        
+    }
+    
+    @IBAction func imdbToWiki(_ sender: AnyObject) {
+        
+        self.performSegue(withIdentifier: "imdbToWiki", sender: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 80, 80))
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        activityIndicator.style = UIActivityIndicatorView.Style.gray
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-        UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+        UIApplication.shared.beginIgnoringInteractionEvents()
         
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         
-        if self.adBannerView != nil {
-            
-            //self.adBannerView!.delegate = self
-            self.canDisplayBannerAds = true
-            print("iAd is showing")
-            
-        } else {
-            
-            //self.adBannerView!.delegate = self
-            self.adBannerView!.hidden = true
-            print("iAd not showing")
-            
-        }
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
         noInternetConnection()
         
     }
     
-    func noInternetConnection() {
+    @objc func noInternetConnection() {
         
         if Reachability.isConnectedToNetwork() == true {
             
             print("Internet connection OK")
             
-            let url = NSURL(string:"http://m.imdb.com/find?ref_=nv_sr_fn&q=" + firstname1 + "+" + lastname1 + "&s=all")
-            let req = NSURLRequest(URL:url!)
-            containerView!.loadRequest(req)
+            let url = URL(string:"http://m.imdb.com/find?ref_=nv_sr_fn&q=" + firstname1 + "+" + lastname1 + "&s=all")
+            let req = URLRequest(url:url!)
+            webView!.load(req)
             
             activityIndicator.stopAnimating()
-            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            UIApplication.shared.endIgnoringInteractionEvents()
             
             
             
@@ -94,17 +80,17 @@ class ImdbViewController: UIViewController, ADBannerViewDelegate {
             print("Internet connection FAILED")
             
             activityIndicator.stopAnimating()
-            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            UIApplication.shared.endIgnoringInteractionEvents()
             
-            let alert = UIAlertController(title: "Sorry, no internet connection found.", message: "WhoJew? requires an internet connection.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Try Again?", style: .Default, handler: { action in
+            let alert = UIAlertController(title: "Sorry, no internet connection found.", message: "WhoJew? requires an internet connection.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Try Again?", style: .default, handler: { action in
                 
-                alert.dismissViewControllerAnimated(true, completion: nil)
+                alert.dismiss(animated: true, completion: nil)
                 self.dismissAlert()
                 
             }))
             
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
             
             
         }
@@ -113,7 +99,7 @@ class ImdbViewController: UIViewController, ADBannerViewDelegate {
     
     func dismissAlert(){
         
-        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(ImdbViewController.noInternetConnection), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(ImdbViewController.noInternetConnection), userInfo: nil, repeats: false)
         
     }
     

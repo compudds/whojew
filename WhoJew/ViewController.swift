@@ -4,11 +4,11 @@
 //
 //  Created by Eric Cook on 3/18/15.
 //  Copyright (c) 2015 Better Search, LLC. All rights reserved.
-//
+///
 
 import UIKit
 import Parse
-import iAd
+
 
 var results = [String]()
 var cat = [String]()
@@ -18,60 +18,59 @@ var lastname = [String]()
 
 var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
 
-class ViewController: UIViewController, ADBannerViewDelegate, UIScrollViewDelegate {
+class ViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet var scroll: UIScrollView!
     
-    @IBAction func homeToSlideshow(sender: AnyObject) {
+    @IBAction func homeToSlideshow(_ sender: AnyObject) {
         
-        self.performSegueWithIdentifier("homeToNav", sender: self)
+        self.performSegue(withIdentifier: "homeToNav", sender: self)
         
     }
     
     @IBOutlet var textField: UITextField!
     
-    @IBOutlet var adBannerView: ADBannerView? //connect in IB connection inspector with your ADBannerView
     
-    @IBAction func quizBtnPressed(sender: AnyObject) {
+    @IBAction func quizBtnPressed(_ sender: AnyObject) {
         
-        self.performSegueWithIdentifier("homeToQuiz", sender: self)
+        self.performSegue(withIdentifier: "homeToQuiz", sender: self)
         
     }
-    @IBAction func toAbout(sender: AnyObject) {
+    @IBAction func toAbout(_ sender: AnyObject) {
         
-        self.performSegueWithIdentifier("homeToAbout", sender: self)
+        self.performSegue(withIdentifier: "homeToAbout", sender: self)
     }
-    @IBAction func btnPressed(sender: AnyObject) {
+    @IBAction func btnPressed(_ sender: AnyObject) {
         
-        activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 80, 80))
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        activityIndicator.style = UIActivityIndicatorView.Style.gray
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-        UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+        UIApplication.shared.beginIgnoringInteractionEvents()
         
         
-        let string = textField.text!.capitalizedString
+        let string = textField.text!.capitalized
         //string.capitalizedString
-        let trimmed = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        let trimmed = string.trimmingCharacters(in: CharacterSet.whitespaces)
         print("Trimmed: \(trimmed)")
         
         if textField.text == "" || textField.text == nil {
             
             activityIndicator.stopAnimating()
-            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            UIApplication.shared.endIgnoringInteractionEvents()
             
-            let alert = UIAlertController(title: "Search can not be blank.", message: "Please enter a valid search.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "New Search", style: .Default, handler: { action in
+            let alert = UIAlertController(title: "Search can not be blank.", message: "Please enter a valid search.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "New Search", style: .default, handler: { action in
                 
-                alert.dismissViewControllerAnimated(true, completion: nil)
+                alert.dismiss(animated: true, completion: nil)
                 
                 self.textField.text = ""
                 
             }))
             
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
             
             
         } else {
@@ -81,8 +80,8 @@ class ViewController: UIViewController, ADBannerViewDelegate, UIScrollViewDelega
         query.limit = 500
         //query.whereKey("firstname", hasPrefix: trimmed)
         //query.whereKey("lastname", hasPrefix: trimmed)
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [PFObject]?, error: NSError?) -> Void in
+        query.findObjectsInBackground {
+            (objects, error) in
             if error == nil {
                 
                     NSLog("Successfully retrieved \(objects!.count).")
@@ -105,8 +104,8 @@ class ViewController: UIViewController, ADBannerViewDelegate, UIScrollViewDelega
             
             } else {
                 
-                print(error)
-                
+                print(error!)
+               
             }
             }
         }
@@ -115,28 +114,28 @@ class ViewController: UIViewController, ADBannerViewDelegate, UIScrollViewDelega
     
     func findName(){
         
-        let string = textField.text!.capitalizedString
+        let string = textField.text!.capitalized
         //string.capitalizedString
-        let trimmed = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        let trimmed = string.trimmingCharacters(in: CharacterSet.whitespaces)
         
         if results.count > 0 {
             
             let search = PFObject(className:"InDatabase")
             search["search"] = trimmed
             search["jewish"] = true
-            search.saveInBackgroundWithBlock {
-                (success: Bool, error: NSError?) -> Void in
+            search.saveInBackground(block: {
+                (success, error) in
                 if (success) {
                     // The object has been saved.
                     print("The search has been saved to \"InDatabase\".")
                 } else {
                     // There was a problem, check error.description
-                    print(error)
+                    print(error!)
                 }
-            }
+            })
 
             
-            self.performSegueWithIdentifier("results", sender: self)
+            self.performSegue(withIdentifier: "results", sender: self)
             
         } else {
             
@@ -147,9 +146,9 @@ class ViewController: UIViewController, ADBannerViewDelegate, UIScrollViewDelega
             lastname = []
             
             
-            if trimmed.rangeOfString(" ") != nil {
+            if trimmed.range(of: " ") != nil {
             
-            let fullNameArr = trimmed.componentsSeparatedByString(" ")
+            let fullNameArr = trimmed.components(separatedBy: " ")
             
             if fullNameArr == [] {
                 
@@ -167,50 +166,50 @@ class ViewController: UIViewController, ADBannerViewDelegate, UIScrollViewDelega
             
             
             activityIndicator.stopAnimating()
-            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            UIApplication.shared.endIgnoringInteractionEvents()
             
             let search = PFObject(className:"NotInDatabase")
             search["search"] = trimmed
             search["jewish"] = false
-            search.saveInBackgroundWithBlock {
-                (success: Bool, error: NSError?) -> Void in
+            search.saveInBackground(block: {
+                (success, error) in
                 if (success) {
                     // The object has been saved.
                     print("The search has been saved to \"NotInDatabase\".")
                 } else {
                     // There was a problem, check error.description
-                    print(error)
+                    print(error!)
                 }
-            }
+            })
 
             
-            let alert = UIAlertController(title: "Sorry, no results found.", message: "\(trimmed) is not Jewish or partially Jewish.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "New Search", style: .Default, handler: { action in
+            let alert = UIAlertController(title: "Sorry, no results found.", message: "\(trimmed) is not Jewish or partially Jewish.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "New Search", style: .default, handler: { action in
                 
-                alert.dismissViewControllerAnimated(true, completion: nil)
+                alert.dismiss(animated: true, completion: nil)
                 
                 self.textField.text = ""
                 
                 
             }))
             
-            alert.addAction(UIAlertAction(title: "Wikipedia", style: .Default, handler: { action in
+            alert.addAction(UIAlertAction(title: "Wikipedia", style: .default, handler: { action in
                 
-                alert.dismissViewControllerAnimated(true, completion: nil)
+                alert.dismiss(animated: true, completion: nil)
                 
-                self.performSegueWithIdentifier("homeToWiki", sender: self)
+                self.performSegue(withIdentifier: "homeToWiki", sender: self)
                 
             }))
             
-            alert.addAction(UIAlertAction(title: "IMDB", style: .Default, handler: { action in
+            alert.addAction(UIAlertAction(title: "IMDB", style: .default, handler: { action in
                 
-                alert.dismissViewControllerAnimated(true, completion: nil)
+                alert.dismiss(animated: true, completion: nil)
                 
-                self.performSegueWithIdentifier("homeToImdb", sender: self)
+                self.performSegue(withIdentifier: "homeToImdb", sender: self)
                 
             }))
 
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
             
         }
         
@@ -218,11 +217,12 @@ class ViewController: UIViewController, ADBannerViewDelegate, UIScrollViewDelega
 
         
     }
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     
         return true
     }
@@ -240,33 +240,21 @@ class ViewController: UIViewController, ADBannerViewDelegate, UIScrollViewDelega
         rel = []
         firstname = []
         lastname = []
-        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         
-        if self.adBannerView != nil {
-            
-            self.canDisplayBannerAds = true
-            print("iAd is showing")
-            
-        } else {
-            
-            self.adBannerView!.hidden = true
-            print("iAd not showing")
-            
-        }
-
     
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
         noInternetConnection()
         
         
     }
     
-    func noInternetConnection() {
+    @objc func noInternetConnection() {
         
         if Reachability.isConnectedToNetwork() == true {
             
@@ -280,18 +268,18 @@ class ViewController: UIViewController, ADBannerViewDelegate, UIScrollViewDelega
             print("Internet connection FAILED")
             
             activityIndicator.stopAnimating()
-            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            UIApplication.shared.endIgnoringInteractionEvents()
             
-            let alert = UIAlertController(title: "Sorry, no internet connection found.", message: "WhoJew? requires an internet connection.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Try Again?", style: .Default, handler: { action in
+            let alert = UIAlertController(title: "Sorry, no internet connection found.", message: "WhoJew? requires an internet connection.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Try Again?", style: .default, handler: { action in
                 
-                alert.dismissViewControllerAnimated(true, completion: nil)
+                alert.dismiss(animated: true, completion: nil)
                 //self.noInternetConnection()
                 self.dismissAlert()
                 
             }))
             
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
             
             
         }
@@ -300,7 +288,7 @@ class ViewController: UIViewController, ADBannerViewDelegate, UIScrollViewDelega
     
     func dismissAlert(){
         
-        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(ViewController.noInternetConnection), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(ViewController.noInternetConnection), userInfo: nil, repeats: false)
         
     }
     

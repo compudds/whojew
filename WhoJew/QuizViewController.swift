@@ -20,9 +20,9 @@ class QuizViewController: UIViewController {
     
     @IBOutlet var label2: UILabel!
     
-    @IBAction func quizToHome(sender: AnyObject) {
+    @IBAction func quizToHome(_ sender: AnyObject) {
         
-        self.performSegueWithIdentifier("quizToHome", sender: self)
+        self.performSegue(withIdentifier: "quizToHome", sender: self)
         
     }
     
@@ -33,33 +33,33 @@ class QuizViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 80, 80))
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        activityIndicator.style = UIActivityIndicatorView.Style.gray
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-        UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+        UIApplication.shared.beginIgnoringInteractionEvents()
         
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
         noInternetConnection()
         
         play()
     }
     
-    func noInternetConnection() {
+    @objc func noInternetConnection() {
         
         if Reachability.isConnectedToNetwork() == true {
             
             print("Internet connection OK")
             
             activityIndicator.stopAnimating()
-            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            UIApplication.shared.endIgnoringInteractionEvents()
             
             
         } else {
@@ -67,17 +67,17 @@ class QuizViewController: UIViewController {
             print("Internet connection FAILED")
             
             activityIndicator.stopAnimating()
-            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            UIApplication.shared.endIgnoringInteractionEvents()
             
-            let alert = UIAlertController(title: "Sorry, no internet connection found.", message: "WhoJew? requires an internet connection.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Try Again?", style: .Default, handler: { action in
+            let alert = UIAlertController(title: "Sorry, no internet connection found.", message: "WhoJew? requires an internet connection.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Try Again?", style: .default, handler: { action in
                 
-                alert.dismissViewControllerAnimated(true, completion: nil)
+                alert.dismiss(animated: true, completion: nil)
                 self.dismissAlert()
                 
             }))
             
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
             
             
         }
@@ -86,7 +86,7 @@ class QuizViewController: UIViewController {
     
     func dismissAlert(){
         
-        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(QuizViewController.noInternetConnection), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(QuizViewController.noInternetConnection), userInfo: nil, repeats: false)
         
     }
     
@@ -115,8 +115,8 @@ class QuizViewController: UIViewController {
             let query = PFQuery(className:"Quiz")
             query.whereKey("jew", equalTo: "y")
             query.limit = 196 //no=152
-            query.findObjectsInBackgroundWithBlock {
-                (objects: [PFObject]?, error: NSError?) -> Void in
+            query.findObjectsInBackground(block: {
+                (objects, error) in
                 if error == nil {
                     
                     NSLog("Successfully retrieved \(objects!.count).")
@@ -124,8 +124,8 @@ class QuizViewController: UIViewController {
                     for object in objects! {
                         
                         let name = object["fullname"] as! String
-                        let newYesResults = name.stringByReplacingOccurrencesOfString(" ", withString: "_", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                        let newYesResults1 = newYesResults.stringByReplacingOccurrencesOfString("\n\n", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                        let newYesResults = name.replacingOccurrences(of: " ", with: "_", options: NSString.CompareOptions.literal, range: nil)
+                        let newYesResults1 = newYesResults.replacingOccurrences(of: "\n\n", with: "", options: NSString.CompareOptions.literal, range: nil)
                         
                         self.yesResults.append(newYesResults1)
                         
@@ -138,11 +138,11 @@ class QuizViewController: UIViewController {
                     
                 } else {
                     
-                    print(error)
+                    print(error!)
                     
                 }
                 
-            }
+            })
             
         } else {
             
@@ -157,8 +157,8 @@ class QuizViewController: UIViewController {
             let query = PFQuery(className:"Quiz")
             query.whereKey("jew", equalTo: "n")
             query.limit = 152 //no=152
-            query.findObjectsInBackgroundWithBlock {
-                (objects: [PFObject]?, error: NSError?) -> Void in
+            query.findObjectsInBackground(block: {
+                (objects, error) in
                 if error == nil {
                     
                     NSLog("Successfully retrieved \(objects!.count).")
@@ -166,8 +166,8 @@ class QuizViewController: UIViewController {
                     for object in objects! {
                         
                         let name = object["fullname"] as! String
-                        let newNoResults = name.stringByReplacingOccurrencesOfString(" ", withString: "_", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                        let newNoResults1 = newNoResults.stringByReplacingOccurrencesOfString("\n\n", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                        let newNoResults = name.replacingOccurrences(of: " ", with: "_", options: NSString.CompareOptions.literal, range: nil)
+                        let newNoResults1 = newNoResults.replacingOccurrences(of: "\n\n", with: "", options: NSString.CompareOptions.literal, range: nil)
                         self.noResults.append(newNoResults1)
                         
                     }
@@ -179,11 +179,11 @@ class QuizViewController: UIViewController {
                     
                 } else {
                     
-                    print(error)
+                    print(error!)
                     
                 }
                 
-            }
+            })
             
         } else {
             
@@ -200,30 +200,30 @@ class QuizViewController: UIViewController {
         
         print(randNum1)
         
-        let trimmed = yesResults[randNum1].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        let trimmed = yesResults[randNum1].trimmingCharacters(in: CharacterSet.whitespaces)
         
         let url = "http://whojew.bettersearchllc.com/images/thumbs/" + trimmed + ".jpg"
         
-        let newLabel = yesResults[randNum1].stringByReplacingOccurrencesOfString("_", withString: " ", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        let newLabel = yesResults[randNum1].replacingOccurrences(of: "_", with: " ", options: NSString.CompareOptions.literal, range: nil)
         
-        let imgURL: NSURL = NSURL(string: url)!
+        let imgURL: URL = URL(string: url)!
         
-        let request: NSURLRequest = NSURLRequest(URL: imgURL)
+        let request: URLRequest = URLRequest(url: imgURL)
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse?,data: NSData?,error: NSError?) -> Void in
+        NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main, completionHandler: {(data, response, error) -> Void in
             if error == nil {
                 
-                let imgGet = UIImage(data: data!)
+                let imgGet = UIImage(data: response!)
                 
                 if self.randNum1 < 88 {
                     
                     if imgGet != nil {
                         
-                        self.pic1.image = UIImage(data: data!)
+                        self.pic1.image = UIImage(data: response!)
                         self.label1.text = newLabel
                         self.tapRec1.addTarget(self, action: #selector(QuizViewController.tappedYes))
                         self.pic1.addGestureRecognizer(self.tapRec1)
-                        self.pic1.userInteractionEnabled = true
+                        self.pic1.isUserInteractionEnabled = true
                         
                     } else {
                         
@@ -231,7 +231,7 @@ class QuizViewController: UIViewController {
                         self.label1.text = newLabel
                         self.tapRec1.addTarget(self, action: #selector(QuizViewController.tappedYes))
                         self.pic1.addGestureRecognizer(self.tapRec1)
-                        self.pic1.userInteractionEnabled = true
+                        self.pic1.isUserInteractionEnabled = true
                         
                     }
                     
@@ -239,11 +239,11 @@ class QuizViewController: UIViewController {
                     
                     if imgGet != nil {
                         
-                        self.pic2.image = UIImage(data: data!)
+                        self.pic2.image = UIImage(data: response!)
                         self.label2.text = newLabel
                         self.tapRec1.addTarget(self, action: #selector(QuizViewController.tappedYes))
                         self.pic2.addGestureRecognizer(self.tapRec1)
-                        self.pic2.userInteractionEnabled = true
+                        self.pic2.isUserInteractionEnabled = true
                         
                         
                     } else {
@@ -252,16 +252,16 @@ class QuizViewController: UIViewController {
                         self.label2.text = newLabel
                         self.tapRec1.addTarget(self, action: #selector(QuizViewController.tappedYes))
                         self.pic2.addGestureRecognizer(self.tapRec1)
-                        self.pic2.userInteractionEnabled = true
+                        self.pic2.isUserInteractionEnabled = true
                         
                     }
                     
                 }
                 
             } else {
-                print(error)
+                print(error!)
             }
-        })
+        } )//as! (URLResponse?, Data?, Error?) -> Void)
         
         
     }
@@ -272,30 +272,30 @@ class QuizViewController: UIViewController {
         
         print(randNum)
         
-        let trimmed = noResults[randNum].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        let trimmed = noResults[randNum].trimmingCharacters(in: CharacterSet.whitespaces)
         
         let url = "http://whojew.bettersearchllc.com/images/thumbs/nonjews/" + trimmed + ".jpeg"
         
-        let newLabel = noResults[randNum].stringByReplacingOccurrencesOfString("_", withString: " ", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        let newLabel = noResults[randNum].replacingOccurrences(of: "_", with: " ", options: NSString.CompareOptions.literal, range: nil)
         
-        let imgURL: NSURL = NSURL(string: url)!
+        let imgURL: URL = URL(string: url)!
         
-        let request: NSURLRequest = NSURLRequest(URL: imgURL)
+        let request: URLRequest = URLRequest(url: imgURL)
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse?,data: NSData?,error: NSError?) -> Void in
+        NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main, completionHandler: {(data, response, error) -> Void in
             if error == nil {
                 
-                let imgGet = UIImage(data: data!)
+                let imgGet = UIImage(data: response!)
                 
                 if self.randNum1 < 88 {
                     
                     if imgGet != nil {
                         
-                        self.pic2.image = UIImage(data: data!)
+                        self.pic2.image = UIImage(data: response!)
                         self.label2.text = newLabel
                         self.tapRec2.addTarget(self, action: #selector(QuizViewController.tappedNo))
                         self.pic2.addGestureRecognizer(self.tapRec2)
-                        self.pic2.userInteractionEnabled = true
+                        self.pic2.isUserInteractionEnabled = true
                         
                         
                         
@@ -305,7 +305,7 @@ class QuizViewController: UIViewController {
                         self.label2.text = newLabel
                         self.tapRec2.addTarget(self, action: #selector(QuizViewController.tappedNo))
                         self.pic2.addGestureRecognizer(self.tapRec2)
-                        self.pic2.userInteractionEnabled = true
+                        self.pic2.isUserInteractionEnabled = true
                         
                     }
                     
@@ -313,11 +313,11 @@ class QuizViewController: UIViewController {
                     
                     if imgGet != nil {
                         
-                        self.pic1.image = UIImage(data: data!)
+                        self.pic1.image = UIImage(data: response!)
                         self.label1.text = newLabel
                         self.tapRec2.addTarget(self, action: #selector(QuizViewController.tappedNo))
                         self.pic1.addGestureRecognizer(self.tapRec2)
-                        self.pic1.userInteractionEnabled = true
+                        self.pic1.isUserInteractionEnabled = true
                         
                         
                     } else {
@@ -326,53 +326,53 @@ class QuizViewController: UIViewController {
                         self.label1.text = newLabel
                         self.tapRec2.addTarget(self, action: #selector(QuizViewController.tappedNo))
                         self.pic1.addGestureRecognizer(self.tapRec2)
-                        self.pic1.userInteractionEnabled = true
+                        self.pic1.isUserInteractionEnabled = true
                         
                     }
                     
                 }
                 
             } else {
-                print(error)
+                print(error!)
             }
-        })
+        }) //as! (URLResponse?, Data?, Error?) -> Void)
         
         
     }
     
-    func tappedYes(){
+    @objc func tappedYes(){
         
         print("Yes Tapped")
         
-        let alert = UIAlertController(title: "Awesome!", message: "You got it right.", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Try Again", style: .Default, handler: { action in
+        let alert = UIAlertController(title: "Awesome!", message: "You got it right.", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Try Again", style: .default, handler: { action in
             
-            alert.dismissViewControllerAnimated(true, completion: nil)
+            alert.dismiss(animated: true, completion: nil)
             
             self.play()
             
         }))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
         
         
         
     }
     
-    func tappedNo(){
+    @objc func tappedNo(){
         
         print("No Tapped")
         
-        let alert = UIAlertController(title: "Sorry!", message: "That's incorrect.", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Try Again", style: .Default, handler: { action in
+        let alert = UIAlertController(title: "Sorry!", message: "That's incorrect.", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Try Again", style: .default, handler: { action in
             
-            alert.dismissViewControllerAnimated(true, completion: nil)
+            alert.dismiss(animated: true, completion: nil)
             
             self.play()
             
         }))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
         
     }
     

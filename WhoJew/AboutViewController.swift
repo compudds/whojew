@@ -11,7 +11,7 @@ import MessageUI
 
 class AboutViewController: UIViewController, MFMailComposeViewControllerDelegate, UIScrollViewDelegate {
 
-    @IBAction func email(sender: AnyObject) {
+    @IBAction func email(_ sender: AnyObject) {
       
         sendEmail()
         
@@ -36,24 +36,24 @@ class AboutViewController: UIViewController, MFMailComposeViewControllerDelegate
         //mc.setMessageBody(messageBody, isHTML: false)
         mc.setToRecipients(toRecipents)
         
-        self.presentViewController(mc, animated: true, completion: nil)
+        self.present(mc, animated: true, completion: nil)
         
     }
     
-    func mailComposeController(controller:MFMailComposeViewController, didFinishWithResult result:MFMailComposeResult, error:NSError?) {
+    func mailComposeController(_ controller:MFMailComposeViewController, didFinishWith result:MFMailComposeResult, error:Error?) {
         switch result.rawValue {
-        case MFMailComposeResultCancelled.rawValue:
+        case MFMailComposeResult.cancelled.rawValue:
             print("Mail cancelled")
-        case MFMailComposeResultSaved.rawValue:
+        case MFMailComposeResult.saved.rawValue:
             print("Mail saved")
-        case MFMailComposeResultSent.rawValue:
+        case MFMailComposeResult.sent.rawValue:
             print("Mail sent")
-        case MFMailComposeResultFailed.rawValue:
+        case MFMailComposeResult.failed.rawValue:
             print("Mail sent failure: \(error!.localizedDescription)")
         default:
             break
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -61,7 +61,7 @@ class AboutViewController: UIViewController, MFMailComposeViewControllerDelegate
     
         scroll.addSubview(aboutLabel)
         
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
 
     }
     

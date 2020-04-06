@@ -29,13 +29,13 @@ var countObj = Int()
 
 class LayoutController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    @IBAction func backToHome(sender: AnyObject) {
+    @IBAction func backToHome(_ sender: AnyObject) {
         
-        self.performSegueWithIdentifier("slideshowToHome", sender: self)
+        self.performSegue(withIdentifier: "slideshowToHome", sender: self)
         
     }
     
-    @IBAction func moreSlides(sender: AnyObject) {
+    @IBAction func moreSlides(_ sender: AnyObject) {
         
         yesResults = []
         newRel1 = []
@@ -53,15 +53,15 @@ class LayoutController: UICollectionViewController, UICollectionViewDelegateFlow
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 80, 80))
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        activityIndicator.style = UIActivityIndicatorView.Style.gray
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-        UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+        UIApplication.shared.beginIgnoringInteractionEvents()
         
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = false
         
         if yesResults == [] {
             
@@ -79,19 +79,19 @@ class LayoutController: UICollectionViewController, UICollectionViewDelegateFlow
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
         noInternetConnection()
         
     }
     
-    func noInternetConnection() {
+    @objc func noInternetConnection() {
         
         if Reachability.isConnectedToNetwork() == true {
             
             print("Internet connection OK")
             activityIndicator.stopAnimating()
-            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            UIApplication.shared.endIgnoringInteractionEvents()
             
             
         } else {
@@ -99,18 +99,18 @@ class LayoutController: UICollectionViewController, UICollectionViewDelegateFlow
             print("Internet connection FAILED")
             
             activityIndicator.stopAnimating()
-            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            UIApplication.shared.endIgnoringInteractionEvents()
             
-            let alert = UIAlertController(title: "Sorry, no internet connection found.", message: "WhoJew? requires an internet connection.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Try Again?", style: .Default, handler: { action in
+            let alert = UIAlertController(title: "Sorry, no internet connection found.", message: "WhoJew? requires an internet connection.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Try Again?", style: .default, handler: { action in
                 
-                alert.dismissViewControllerAnimated(true, completion: nil)
+                alert.dismiss(animated: true, completion: nil)
                 
                 self.dismissAlert()
                 
             }))
             
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
             
             
         }
@@ -119,7 +119,7 @@ class LayoutController: UICollectionViewController, UICollectionViewDelegateFlow
     
     func dismissAlert(){
         
-        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(LayoutController.noInternetConnection), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(LayoutController.noInternetConnection), userInfo: nil, repeats: false)
         
     }
     
@@ -130,20 +130,20 @@ class LayoutController: UICollectionViewController, UICollectionViewDelegateFlow
     
     // MARK: UICollectionViewDataSource
     
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         //#warning Incomplete method implementation -- Return the number of sections
         return 1
     }
     
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //#warning Incomplete method implementation -- Return the number of items in the section
         return 250
     }
     
     func getQuizYesArray(){
         
-        for(var i=0; i<500; i++){
+        for _ in 0..<500 {
             
             let randNum2: Int = Int(arc4random_uniform(4400))
             
@@ -161,8 +161,8 @@ class LayoutController: UICollectionViewController, UICollectionViewDelegateFlow
             let query = PFQuery(className:"Jews")
             query.whereKey("id", containedIn: idArray)
             query.limit = 500
-            query.findObjectsInBackgroundWithBlock {
-                (objects: [PFObject]?, error: NSError?) -> Void in
+            query.findObjectsInBackground(block: {
+                (objects, error) in
                 
                 if error == nil {
             
@@ -172,8 +172,8 @@ class LayoutController: UICollectionViewController, UICollectionViewDelegateFlow
                         
                         newRel1.append(object["cat"] as! String)
                         let name = object["fullname"] as! String
-                        let newYesResults = name.stringByReplacingOccurrencesOfString(" ", withString: "_", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                        let newYesResults1 = newYesResults.stringByReplacingOccurrencesOfString("\n\n", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                        let newYesResults = name.replacingOccurrences(of: " ", with: "_", options: NSString.CompareOptions.literal, range: nil)
+                        let newYesResults1 = newYesResults.replacingOccurrences(of: "\n\n", with: "", options: NSString.CompareOptions.literal, range: nil)
                         
                         yesResults.append(newYesResults1)
                         
@@ -189,12 +189,12 @@ class LayoutController: UICollectionViewController, UICollectionViewDelegateFlow
                     
                 } else {
                     
-                    print(error)
+                    print(error!)
                     
                     
                 }
                 
-            }
+            })
             
         } else {
             
@@ -208,15 +208,15 @@ class LayoutController: UICollectionViewController, UICollectionViewDelegateFlow
 
     func getPic1() {
     
-        for(var i=0; i<countObj; i += 1){
+        for i in 0..<countObj {
             
             //randNum1 = Int(arc4random_uniform(300))
             
-            let trimmed = yesResults[i].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            let trimmed = yesResults[i].trimmingCharacters(in: CharacterSet.whitespaces)
             
             urls = ["http://whojew.bettersearchllc.com/images/thumbs/" + trimmed + ".jpg"] + urls
             
-            names = [yesResults[i].stringByReplacingOccurrencesOfString("_", withString: " ", options: NSStringCompareOptions.LiteralSearch, range: nil)] + names
+            names = [yesResults[i].replacingOccurrences(of: "_", with: " ", options: NSString.CompareOptions.literal, range: nil)] + names
             
             let newRelReOrder = [newRel1[i]]
             
@@ -232,9 +232,9 @@ class LayoutController: UICollectionViewController, UICollectionViewDelegateFlow
     
     
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CollectionViewCell
         
         if names == [] {
             
@@ -246,35 +246,57 @@ class LayoutController: UICollectionViewController, UICollectionViewDelegateFlow
             
             let urlPath = urls[indexPath.row % 1000]
             
-            let imgURL: NSURL = NSURL(string: urlPath)!
+            let imgURL: URL = URL(string: urlPath)!
             
-            let request: NSURLRequest = NSURLRequest(URL: imgURL)
+            let request: URLRequest = URLRequest(url: imgURL)
             
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse?,data: NSData?,error: NSError?) -> Void in
+            /*NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main, completionHandler: {(response: URLResponse?,data: Data?,error: NSError?) -> Void in
+            
+            var request = NSMutableURLRequest(URL: NSURL(string: "YOUR URL")!)
+            var session = NSURLSession.sharedSession()
+            request.HTTPMethod = "POST"
+            
+            var params = ["username":"username", "password":"password"] as Dictionary<String, String>
+            
+            request.HTTPBody = try? NSJSONSerialization.dataWithJSONObject(params, options: [])
+            
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            var task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+                print("Response: \(response)")})*/
+
+            
+            NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main, completionHandler: {(data, response, error) -> Void in
+                
                 if error == nil {
                     
-                    cell.img.image = UIImage(data: data!)
+                    //cell.img.image = UIImage(data: data)
+                    cell.img.image = UIImage(data: response!)
                     self.tapRec1.addTarget(self, action: #selector(LayoutController.tapped))
                     cell.img.addGestureRecognizer(self.tapRec1)
-                    cell.img.userInteractionEnabled = true
+                    cell.img.isUserInteractionEnabled = true
                     
                     
                 } else {
-                    print(error)
+                    print(error!)
                     
                 }
-            })
-            
+            //} as! (URLResponse?, Data?, Error?) -> Void)
+            } )//as! (data, response, error) -> Void)
+        
+
+        
         }
         
         return cell
     }
     
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
         collectionView.collectionViewLayout.invalidateLayout()
-        collectionView.cellForItemAtIndexPath(indexPath)!
-        let fullNameArr = names[indexPath.row].componentsSeparatedByString(" ")
+        collectionView.cellForItem(at: indexPath)!
+        let fullNameArr = names[indexPath.row].components(separatedBy: " ")
         firstname1 = fullNameArr[0]
         lastname1 = fullNameArr[1]
         print("\(firstname1) \(lastname1)")
@@ -307,21 +329,21 @@ class LayoutController: UICollectionViewController, UICollectionViewDelegateFlow
         }
     }*/
     
-    func tapped(){
+    @objc func tapped(){
         
         print("Tapped")
         
-        self.performSegueWithIdentifier("slideshowToSingle", sender: self)
+        self.performSegue(withIdentifier: "slideshowToSingle", sender: self)
     }
     
     
-    func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             return CGSize(width: 170, height: 300)
     }
     
-    func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
             return sectionInsets
     }
     
