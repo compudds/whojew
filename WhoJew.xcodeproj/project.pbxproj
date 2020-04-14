@@ -142,6 +142,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		070981312445DB8F00EFE92D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		07660D871AB9A84700CC33AE = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +173,7 @@
 				07660D921AB9A84700CC33AE /* WhoJew */,
 				07660DA81AB9A84700CC33AE /* WhoJewTests */,
 				07660D911AB9A84700CC33AE /* Products */,
+				070981312445DB8F00EFE92D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
