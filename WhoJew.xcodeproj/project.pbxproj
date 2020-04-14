@@ -59,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		070981302445D92400EFE92D /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = package.json; path = "../../../../Users/Eric/Desktop/node-v12.16.1-darwin-x64/lib/node_modules/npm/package.json"; sourceTree = "<group>"; };
 		071618BD1AEDBA9C004DE352 /* LayoutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutController.swift; sourceTree = "<group>"; };
 		071E25941D92D87E001A6A03 /* WhoJew.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhoJew.entitlements; sourceTree = "<group>"; };
 		073AAA701AE3D260006A3C05 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = ../Reachability.swift; sourceTree = "<group>"; };
@@ -144,6 +145,7 @@
 		07660D871AB9A84700CC33AE = {
 			isa = PBXGroup;
 			children = (
+				070981302445D92400EFE92D /* package.json */,
 				07D754E81CE561C800B7C0F6 /* libc++.tbd */,
 				07658C191BAA2C17005BBEF3 /* libz.tbd */,
 				07658C171BAA2C09005BBEF3 /* libsqlite3.tbd */,
