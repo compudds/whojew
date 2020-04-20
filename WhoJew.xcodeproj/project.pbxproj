@@ -43,7 +43,6 @@
 		07B3BE991ABB463E00D61617 /* female-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 07B3BE981ABB463E00D61617 /* female-placeholder.png */; };
 		07B3BE9B1ABB834100D61617 /* WkikViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3BE9A1ABB834100D61617 /* WkikViewController.swift */; };
 		07B6AE651CDF7384007A42CE /* composer.json in Resources */ = {isa = PBXBuildFile; fileRef = 07B6AE641CDF7384007A42CE /* composer.json */; };
-		07D754E41CE5607A00B7C0F6 /* Pushwoosh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D754E31CE5607A00B7C0F6 /* Pushwoosh.framework */; };
 		07D754E71CE5609B00B7C0F6 /* bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D754E61CE5609B00B7C0F6 /* bridge.m */; };
 		07D754E91CE561C800B7C0F6 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D754E81CE561C800B7C0F6 /* libc++.tbd */; };
 /* End PBXBuildFile section */
@@ -101,7 +100,6 @@
 		07B3BE981ABB463E00D61617 /* female-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "female-placeholder.png"; sourceTree = "<group>"; };
 		07B3BE9A1ABB834100D61617 /* WkikViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WkikViewController.swift; sourceTree = "<group>"; };
 		07B6AE641CDF7384007A42CE /* composer.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = composer.json; sourceTree = "<group>"; };
-		07D754E31CE5607A00B7C0F6 /* Pushwoosh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Pushwoosh.framework; sourceTree = "<group>"; };
 		07D754E51CE5609A00B7C0F6 /* WhoJew-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WhoJew-Bridging-Header.h"; sourceTree = "<group>"; };
 		07D754E61CE5609B00B7C0F6 /* bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bridge.m; sourceTree = "<group>"; };
 		07D754E81CE561C800B7C0F6 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -128,7 +126,6 @@
 				07660DBC1AB9A8BD00CC33AE /* StoreKit.framework in Frameworks */,
 				07660DBA1AB9A8B300CC33AE /* SystemConfiguration.framework in Frameworks */,
 				07660DB61AB9A88000CC33AE /* AddressBook.framework in Frameworks */,
-				07D754E41CE5607A00B7C0F6 /* Pushwoosh.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,7 +153,6 @@
 				07D754E81CE561C800B7C0F6 /* libc++.tbd */,
 				07658C191BAA2C17005BBEF3 /* libz.tbd */,
 				07658C171BAA2C09005BBEF3 /* libsqlite3.tbd */,
-				07D754E31CE5607A00B7C0F6 /* Pushwoosh.framework */,
 				07A9375E1CB5A6C0001D62CC /* Parse.framework */,
 				07A937601CB5A6CF001D62CC /* Bolts.framework */,
 				07AA8D4F1AD5C78D00BB31A8 /* iAd.framework */,
