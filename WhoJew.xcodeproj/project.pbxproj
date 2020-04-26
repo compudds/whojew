@@ -31,7 +31,6 @@
 		07660DCA1AB9A90E00CC33AE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07660DC91AB9A90E00CC33AE /* CFNetwork.framework */; };
 		07660DCC1AB9A91B00CC33AE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07660DCB1AB9A91B00CC33AE /* AudioToolbox.framework */; };
 		07770BB81AB9FDC000414FCB /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07770BB71AB9FDC000414FCB /* TableViewController.swift */; };
-		078DCD42243E49B600DB1645 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = 078DCD41243E49B600DB1645 /* package.json */; };
 		0794597B1B80A0F800EFEAF2 /* ViewControllerSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0794597A1B80A0F800EFEAF2 /* ViewControllerSingle.swift */; };
 		07A9375F1CB5A6C0001D62CC /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A9375E1CB5A6C0001D62CC /* Parse.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		07A937611CB5A6CF001D62CC /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A937601CB5A6CF001D62CC /* Bolts.framework */; };
@@ -88,7 +87,6 @@
 		07660DC91AB9A90E00CC33AE /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		07660DCB1AB9A91B00CC33AE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		07770BB71AB9FDC000414FCB /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		078DCD41243E49B600DB1645 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = package.json; path = "../../../../../Users/Eric/Desktop/node-v12.16.1-darwin-x64/lib/node_modules/npm/package.json"; sourceTree = "<group>"; };
 		0794597A1B80A0F800EFEAF2 /* ViewControllerSingle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerSingle.swift; sourceTree = "<group>"; };
 		07A9375E1CB5A6C0001D62CC /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		07A937601CB5A6CF001D62CC /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 		07660D921AB9A84700CC33AE /* WhoJew */ = {
 			isa = PBXGroup;
 			children = (
-				078DCD41243E49B600DB1645 /* package.json */,
 				071E25941D92D87E001A6A03 /* WhoJew.entitlements */,
 				07660D951AB9A84700CC33AE /* AppDelegate.swift */,
 				07D754E61CE5609B00B7C0F6 /* bridge.m */,
@@ -331,7 +328,6 @@
 			files = (
 				07660D9B1AB9A84700CC33AE /* Main.storyboard in Resources */,
 				07B05B661ABEF6A1009D5FB3 /* whojew.png in Resources */,
-				078DCD42243E49B600DB1645 /* package.json in Resources */,
 				07B3BE991ABB463E00D61617 /* female-placeholder.png in Resources */,
 				07660DA01AB9A84700CC33AE /* LaunchScreen.xib in Resources */,
 				07B05B621ABBACA6009D5FB3 /* Icon-60@3x.png in Resources */,
